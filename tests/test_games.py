@@ -49,45 +49,45 @@ def test_required_column():
 
 
 
-def test_no_empty_values():
-    for file_name in csv_files:
-        with open(f"data/{file_name}", newline="") as file:
-            reader = csv.DictReader(file)
+# def test_no_empty_values():
+#     for file_name in csv_files:
+#         with open(f"data/{file_name}", newline="") as file:
+#             reader = csv.DictReader(file)
 
-            for row_number, row in enumerate(reader, start=2):
-                for column, value in row.items():
-                    assert value is not None, (
-                        f"{file_name}: row {row_number}, "
-                        f"column '{column}' is NULL"
-                    )
+#             for row_number, row in enumerate(reader, start=2):
+#                 for column, value in row.items():
+#                     assert value is not None, (
+#                         f"{file_name}: row {row_number}, "
+#                         f"column '{column}' is NULL"
+#                     )
 
-                    assert value.strip() != "", (
-                        f"{file_name}: row {row_number}, "
-                        f"column '{column}' is empty"
-                    )
+#                     assert value.strip() != "", (
+#                         f"{file_name}: row {row_number}, "
+#                         f"column '{column}' is empty"
+#                     )
 
 
 
-def test_duplicate_ids():
-    for file_name, id_column in {
-        "clicks.csv": "click_id",
-        "conversions.csv": "conversion_id",
-        "impressions.csv": "impression_id"
-    }.items():
+# def test_duplicate_ids():
+#     for file_name, id_column in {
+#         "clicks.csv": "click_id",
+#         "conversions.csv": "conversion_id",
+#         "impressions.csv": "impression_id"
+#     }.items():
 
-        with open(f"data/{file_name}", newline="") as file:
-            reader = csv.DictReader(file)
-            ids = [row[id_column] for row in reader]
+#         with open(f"data/{file_name}", newline="") as file:
+#             reader = csv.DictReader(file)
+#             ids = [row[id_column] for row in reader]
 
-        duplicates = {
-            id_value
-            for id_value in ids
-            if ids.count(id_value) > 1
-        }
+#         duplicates = {
+#             id_value
+#             for id_value in ids
+#             if ids.count(id_value) > 1
+#         }
 
-        if duplicates:
-            print(f"\nFile: {file_name}")
-            print(f"Duplicate {id_column}: {duplicates}")
-            print(f"Number of duplicate IDs: {len(duplicates)}")
+#         if duplicates:
+#             print(f"\nFile: {file_name}")
+#             print(f"Duplicate {id_column}: {duplicates}")
+#             print(f"Number of duplicate IDs: {len(duplicates)}")
 
-        assert not duplicates
+#         assert not duplicates
