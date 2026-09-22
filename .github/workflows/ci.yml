@@ -26,3 +26,9 @@ jobs :
 
             - name : Run tests
               run: pytest -v
+
+            - name: Build Docker image
+              run: docker build -t game-data-testing .
+
+            - name: Run Docker container
+              run: docker run --rm game-data-testing
